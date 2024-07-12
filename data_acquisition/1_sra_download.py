@@ -39,7 +39,6 @@ nd_metadata["run_accession"].to_csv(os.path.join(cwd, f"{srp_id}_nd_srr_ids.txt"
 pre_t2d_metadata.to_csv(os.path.join(cwd, f"{srp_id}_pre_t2d_metadata.tsv"), index=False, sep="\t")
 pre_t2d_metadata["run_accession"].to_csv(os.path.join(cwd, f"{srp_id}_pre_t2d_srr_ids.txt"), index=False, header=False)
 
-
 # # Download non-diabetic samples (`sra` files) to start
 db.download(df=nd_metadata, out_dir=fastq_dir, skip_confirmation=True)
 
