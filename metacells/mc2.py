@@ -12,7 +12,7 @@ from scipy import io
 import os
 
 import anndata as ad
-import metacells as mc
+import metacells.metacells as mc
 import scipy.sparse as sp
 import seaborn as sb
 from math import hypot

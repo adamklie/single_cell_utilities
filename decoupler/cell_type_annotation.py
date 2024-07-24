@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-scRNA-seq Analysis Script
-
 This script performs cell type annotation on scRNA-seq data using decoupler.
 
 Usage:
