@@ -1,0 +1,49 @@
+Mon Aug 21 18:16:36 PDT 2023
+Job ID: 576405
+
+Input cisTopic object: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl
+Output file: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/model.pkl
+Number of topics: 2
+Number of CPU cores: 8
+Number of iterations: 150
+Alpha: 50
+Divide alpha by the number of topics: True
+Eta: 0.1
+Divide eta by the number of topics: False
+Path to save intermediate files: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2
+Seed: 555
+Path to TMP dir: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/tmp
+Reuse Mallet corpus: False
+
+Running:
+python /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py --inputcisTopic_obj /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl --output /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/model.pkl --n_topics 2 --n_cpu 8 --n_iter 150 --alpha 50 --alpha_by_topic True --eta 0.1 --eta_by_topic False --save_path /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2 --seed 555 --temp_dir /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/tmp --reuse_corpus False
+
+Input cisTopic_object: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl
+Output file: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/model.pkl
+Number of topics: ['2']
+Number of topics: [2]
+Alpha: 50
+Divide alpha by the number of topics: True
+Eta: 0.1
+Divide eta by the number of topics: False
+Number of iterations: 150
+Number of cores: 8
+Path to save intermediate files: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2
+Seed: 555
+Path to TMP dir: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/tmp/
+Reuse Mallet corpus: False
+Running models
+--------------
+2023-08-21 18:18:01,419 cisTopic     INFO     Formatting input to corpus
+2023-08-21 18:19:40,407 gensim.corpora.dictionary INFO     adding document #0 to Dictionary<0 unique tokens: []>
+2023-08-21 18:24:38,971 gensim.corpora.dictionary INFO     adding document #10000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:29:38,378 gensim.corpora.dictionary INFO     adding document #20000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:31:45,771 gensim.corpora.dictionary INFO     adding document #30000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:33:40,916 gensim.corpora.dictionary INFO     adding document #40000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:37:17,334 gensim.corpora.dictionary INFO     adding document #50000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:37:46,980 gensim.corpora.dictionary INFO     adding document #60000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:41:48,621 gensim.corpora.dictionary INFO     adding document #70000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:46:16,173 gensim.corpora.dictionary INFO     adding document #80000 to Dictionary<0 unique tokens: []>
+2023-08-21 18:48:06,322 gensim.corpora.dictionary INFO     built Dictionary<262418 unique tokens: ['0', '1', '2', '3', '4']...> from 83289 documents (total 602396301 corpus positions)
+2023-08-21 18:48:06,326 cisTopic     INFO     Running model with 2 topics
+2023-08-21 18:48:06,367 LDAMalletWrapper INFO     Serializing temporary corpus to /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/2/tmp/corpus.txt

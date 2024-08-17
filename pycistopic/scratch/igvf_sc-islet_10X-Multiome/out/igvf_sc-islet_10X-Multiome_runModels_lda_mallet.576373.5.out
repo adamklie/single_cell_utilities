@@ -1,0 +1,21 @@
+Mon Aug 21 17:59:38 PDT 2023
+Job ID: 576378
+
+Input cisTopic object: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl
+Output file: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/models.pkl
+Number of topics: 32
+Number of CPU cores: 8
+Number of iterations: 150
+Alpha: 50
+Divide alpha by the number of topics: True
+Eta: 0.1
+Divide eta by the number of topics: False
+Path to save intermediate files: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/32
+Seed: 555
+Path to TMP dir: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/32
+Reuse Mallet corpus: False
+
+Running:
+python /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py --inputcisTopic_obj /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl --output /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/models.pkl --n_topics 32 --n_cpu 8 --n_iter 150 --alpha 50 --alpha_by_topic True --eta 0.1 --eta_by_topic False --save_path /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/32 --seed 555 --temp_dir /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/32 --reuse_corpus False
+
+Mon Aug 21 17:59:40 PDT 2023

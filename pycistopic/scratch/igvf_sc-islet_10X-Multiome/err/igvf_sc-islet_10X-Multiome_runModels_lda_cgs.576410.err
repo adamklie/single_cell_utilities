@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_cgs.py", line 127, in <module>
+    main()
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_cgs.py", line 110, in main
+    models=run_cgs_models(cisTopic_obj,
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 156, in run_cgs_models
+    ray.init(num_cpus=n_cpu, **kwargs)
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/ray/_private/worker.py", line 1429, in init
+    _global_node = ray._private.node.Node(
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/ray/_private/node.py", line 237, in __init__
+    self._plasma_store_socket_name = self._prepare_socket_file(
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/ray/_private/node.py", line 774, in _prepare_socket_file
+    raise OSError(
+OSError: AF_UNIX path length cannot exceed 107 bytes: '/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cgs/tmp/session_2023-08-21_18-22-08_330415_2490967/sockets/plasma_store'

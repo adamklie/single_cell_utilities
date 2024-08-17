@@ -1,0 +1,58 @@
+Mon Aug 21 23:24:18 PDT 2023
+Job ID: 577506
+
+Input cisTopic object: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl
+Output file: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/model.pkl
+Number of topics: 64
+Number of CPU cores: 8
+Number of iterations: 150
+Alpha: 50
+Divide alpha by the number of topics: True
+Eta: 0.1
+Divide eta by the number of topics: False
+Path to save intermediate files: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64
+Seed: 555
+Path to TMP dir: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp
+Reuse Mallet corpus: False
+
+Running:
+python /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py --inputcisTopic_obj /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl --output /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/model.pkl --n_topics 64 --n_cpu 8 --n_iter 150 --alpha 50 --alpha_by_topic True --eta 0.1 --eta_by_topic False --save_path /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64 --seed 555 --temp_dir /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp --reuse_corpus False
+
+Input cisTopic_object: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/cistopic_obj.pkl
+igvf_sc-islet_10X-Multiome_10Aug23 cisTopic object loaded
+cistopic_obj_load.fragment_matrix.shape: (262418, 83289)
+Output file: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/model.pkl
+Number of topics: ['64']
+Number of topics: [64]
+Alpha: 50
+Divide alpha by the number of topics: True
+Eta: 0.1
+Divide eta by the number of topics: False
+Number of iterations: 150
+Number of cores: 8
+Path to save intermediate files: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64
+Seed: 555
+Path to TMP dir: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/
+Reuse Mallet corpus: False
+Path to Mallet binary: /cellar/users/aklie/opt/Mallet-202108/bin/mallet
+Running models
+--------------
+2023-08-21 23:25:32,173 cisTopic     INFO     Formatting input to corpus
+2023-08-21 23:26:57,662 gensim.corpora.dictionary INFO     adding document #0 to Dictionary<0 unique tokens: []>
+2023-08-21 23:28:26,316 gensim.corpora.dictionary INFO     adding document #10000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:29:49,378 gensim.corpora.dictionary INFO     adding document #20000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:30:23,143 gensim.corpora.dictionary INFO     adding document #30000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:30:53,026 gensim.corpora.dictionary INFO     adding document #40000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:31:49,816 gensim.corpora.dictionary INFO     adding document #50000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:31:57,904 gensim.corpora.dictionary INFO     adding document #60000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:33:02,788 gensim.corpora.dictionary INFO     adding document #70000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:34:13,587 gensim.corpora.dictionary INFO     adding document #80000 to Dictionary<0 unique tokens: []>
+2023-08-21 23:34:42,823 gensim.corpora.dictionary INFO     built Dictionary<262418 unique tokens: ['0', '1', '2', '3', '4']...> from 83289 documents (total 602396301 corpus positions)
+2023-08-21 23:34:42,826 cisTopic     INFO     Running model with 64 topics
+2023-08-21 23:34:42,856 LDAMalletWrapper INFO     Serializing temporary corpus to /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/corpus.txt
+2023-08-22 00:00:28,676 LDAMalletWrapper INFO     Converting temporary corpus to MALLET format with /cellar/users/aklie/opt/Mallet-202108/bin/mallet import-file --preserve-case --keep-sequence --remove-stopwords --token-regex "\S+" --input /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/corpus.txt --output /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/corpus.mallet
+2023-08-22 00:06:28,486 LDAMalletWrapper INFO     Training MALLET LDA with /cellar/users/aklie/opt/Mallet-202108/bin/mallet train-topics --input /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/corpus.mallet --num-topics 64  --alpha 50 --beta 0.1 --optimize-interval 0 --num-threads 8 --output-state /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/5d0dac_state.mallet.gz --output-doc-topics /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/5d0dac_doctopics.txt --output-topic-keys /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/5d0dac_topickeys.txt --num-iterations 150 --inferencer-filename /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/5d0dac_inferencer.mallet --doc-topics-threshold 0.0  --random-seed 555
+2023-08-22 06:00:16,759 LDAMalletWrapper INFO     loading assigned topics from /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64/tmp/5d0dac_state.mallet.gz
+2023-08-22 06:27:23,608 cisTopic     INFO     Model with 64 topics done!
+2023-08-22 06:27:23,609 cisTopic     INFO     Saving model with 64 topics at /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/64
+Tue Aug 22 06:27:26 PDT 2023

@@ -1,0 +1,21 @@
+/bin/sh: mallet: command not found
+Traceback (most recent call last):
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 131, in <module>
+    
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 112, in main
+    os.environ['MALLET_MEMORY'] = '100G'
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 765, in run_cgs_models_mallet
+    model_list = [
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 766, in <listcomp>
+    run_cgs_model_mallet(
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 873, in run_cgs_model_mallet
+    model = LDAMallet(
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 471, in __init__
+    self.train(corpus, reuse_corpus)
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 537, in train
+    self.convert_input(corpus, infer=False)
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/pycisTopic/lda_models.py", line 522, in convert_input
+    check_output(args=cmd, shell=True)
+  File "/cellar/users/aklie/opt/miniconda3/envs/scenicplus/lib/python3.8/site-packages/gensim/utils.py", line 1894, in check_output
+    raise error
+subprocess.CalledProcessError: Command 'mallet import-file --preserve-case --keep-sequence --remove-stopwords --token-regex "\S+" --input /cellar/users/aklie/tmpcorpus.txt --output /cellar/users/aklie/tmpcorpus.mallet' returned non-zero exit status 127.

@@ -1,0 +1,2 @@
+/cm/local/apps/slurm/var/spool/job576366/slurm_script: line 56: [: /cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/results/igvf_sc-islet_10X-Multiome/10Aug23/mallet/: binary operator expected
+/cm/local/apps/slurm/var/spool/job576366/slurm_script: line 62: $save_path/params_mallet.yaml: ambiguous redirect

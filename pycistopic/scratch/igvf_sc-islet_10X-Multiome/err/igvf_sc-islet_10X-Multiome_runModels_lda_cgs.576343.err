@@ -1,0 +1,2 @@
+2023-08-21 17:42:04,755	INFO worker.py:1519 -- Started a local Ray instance. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+slurmstepd: error: *** JOB 576343 ON carter-cn-01 CANCELLED AT 2023-08-21T18:17:08 ***
