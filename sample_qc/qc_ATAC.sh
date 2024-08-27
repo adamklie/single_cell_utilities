@@ -23,7 +23,6 @@ sample_id=${sample_ids[$SLURM_ARRAY_TASK_ID-1]}
 config_yaml=$2
 outdir_path=$3/${sample_id}/atac
 
-
 # Echo inputs and number of inputs
 echo -e "total inputs: ${#input_frag_paths[@]}"
 echo -e "input_frag_path: $input_frag_path"
