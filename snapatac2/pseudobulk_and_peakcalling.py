@@ -27,6 +27,7 @@ def main(args):
     input_path = args.input_path
     outdir_path = args.outdir_path
     groupby_key = args.groupby_key
+    selections = args.selections
     replicate_key = args.replicate_key
     annotations_path = args.annotations_path
     chromsizes_path = args.chromsizes_path
@@ -71,6 +72,8 @@ def main(args):
             cell_annotations = pd.read_csv(annotations_path, index_col=0, header=None)[1]
         else:
             raise ValueError("Annotation file must be in .tsv, .txt, or .csv format.")
+        cell_annotations = cell_annotations[~cell_annotations.isna()]
+        logging.info(f"Annotation file contains {len(cell_annotations)} cell ids.")
         if isinstance(adata, snap.AnnDataSet):
             subset_out = os.path.join(outdir_path, "annotated.h5ads")
             adata = adata.subset(obs_indices=np.where(pd.Index(adata.obs_names).isin(cell_annotations.index))[0], out=subset_out)[0]
@@ -142,6 +145,7 @@ def main(args):
         groupby=groupby_key,
         replicate=replicate_key,
         replicate_qvalue=0.1 if replicate_key is not None else None,
+        selections=selections,
         n_jobs=n_jobs,
         #min_len=200  for snapatac2 v2.6 upgrade
     )
@@ -203,6 +207,7 @@ if __name__ == "__main__":
     parser.add_argument('--input_path', type=str, required=False, help='Path to input AnnData or AnnDataset, will infer from file extension.')
     parser.add_argument('--outdir_path', type=str, required=True, help='Path to output directory.')
     parser.add_argument('--groupby_key', type=str, required=False, help='Key to groupby.')
+    parser.add_argument('--selections', type=str, required=False, default=None, help='Selections to use for peak calling.')
     parser.add_argument('--replicate_key', type=str, required=False, default=None, help='Key to replicate.')
     parser.add_argument('--annotations_path', type=str, required=False, help='Path to annotation file.')
     parser.add_argument('--bg2bw_path', type=str, required=False, help='Path to bedGraphToBigWig.', default="/cellar/users/aklie/opt/bedGraphToBigWig")
