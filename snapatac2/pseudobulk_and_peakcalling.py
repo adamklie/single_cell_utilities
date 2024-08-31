@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
 """
-integrate_snapatac2.py
-Run with SnapATAC2 version 2.5.3
-
-This script creates AnnDatasets
-and performs feature selection, spectral embedding, clustering, and plotting.
-
-Usage:
-    python integrate_snapatac2.py -i <input_h5ad_paths> -o <outdir_path> [options]
 
 Author: Adam Klie
 """

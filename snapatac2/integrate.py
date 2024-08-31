@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-integrate_snapatac2.py
+integrate.py
 
-This script creates AnnDatasets from multiple h5ad files and performs
-feature selection, spectral embedding, clustering, and plotting using
-SnapATAC2.
+This script is a recipe for creating an AnnDataset from multiple h5ad files
+It then performs basic feature selection, spectral embedding and clustering
+using SnapATAC2.
 
 Usage:
-    python integrate_snapatac2.py -i <input_h5ad_paths> -o <outdir_path> [options]
+    python integrate.py -i <input_h5ad_paths> -o <outdir_path> [options]
 
 Author: Adam Klie
 """
@@ -232,7 +232,7 @@ def main(args):
 
 if __name__ == "__main__":
     # Setting up argparse
-    parser = argparse.ArgumentParser(description="analyze a single h5ads sample using snapatac2.")
+    parser = argparse.ArgumentParser(description="Create an AnnDataset from multiple h5ad files and perform basic feature selection, spectral embedding and clustering using SnapATAC2.")
     parser.add_argument('--input_h5ad_paths', nargs="+", required=True, help="Paths to input h5ad files. Space separated. Must be in the same order as sample_ids.")
     parser.add_argument('--sample_ids', nargs="+", required=False, default=None, help="Sample ids for each h5ad file. Space separated. If not provided, will use the file prefixes.")
     parser.add_argument('--outdir_path', required=True, help="Path to the output directory to save all results.")

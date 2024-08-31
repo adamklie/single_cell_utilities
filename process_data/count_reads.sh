@@ -1,0 +1,1 @@
+seqkit stats --threads 24 --tabular /cellar/users/aklie/data/datasets/igvf_sc-islet_10X-Multiome/fastq/21Jul23/*.fastq.gz > /cellar/users/aklie/data/datasets/igvf_sc-islet_10X-Multiome/metadata/11Oct23/fastq_stats.tsv

@@ -2,7 +2,7 @@
 
 #####
 # USAGE:
-# sbatch motif_finding.sh --SLURM_SETINGS <input_bed> <genome> <output> <size>
+# sbatch homer.sh --SLURM_SETINGS <input_bed> <genome> <output> <size>
 #####
 
 # Date
