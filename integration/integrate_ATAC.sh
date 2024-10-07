@@ -12,7 +12,7 @@ echo -e "Job ID: $SLURM_JOB_ID\n"
 # Configuring env (choose either singularity or conda)
 source activate /cellar/users/aklie/opt/miniconda3/envs/scverse-lite-py39
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/miniconda3/lib/
-script_path=/cellar/users/aklie/projects/igvf/single_cell_utilities/snapatac2/integrate_snapatac2.py
+script_path=/cellar/users/aklie/projects/igvf/single_cell_utilities/snapatac2/integrate.py
 
 # Inputs
 input_tsv=$1

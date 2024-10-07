@@ -11,6 +11,7 @@ def get_pseudobulk_groups(
     target_max_cells_per_pb: int = None,
     obs_key: str = "pseudobulk",
     copy: bool = False,
+    random_state: int = 1234
 ) -> Union[AnnData, None]:
     """Add a pseudobulk column to adata.obs, which assigns cells to pseudobulks.
     
@@ -37,7 +38,7 @@ def get_pseudobulk_groups(
         Annotated data matrix including a pseudobulk column in adata.obs if copy=True, otherwise None.
     """
     # Set the seed for reproducibility
-    random.seed(1234)
+    random.seed(random_state)
 
     # If copy=True, make a copy of adata
     if copy:

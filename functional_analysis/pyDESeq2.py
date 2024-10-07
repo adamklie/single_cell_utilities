@@ -46,6 +46,8 @@ def main(args):
     workflow_hash.update(str(random.getrandbits(128)).encode("utf-8"))
 
     # Log file
+    if os.path.exists(os.path.join(outdir_path, "pydeseq2.log")):
+        os.remove(os.path.join(outdir_path, "pydeseq2.log"))
     logging.basicConfig(
         filename=os.path.join(outdir_path, "pydeseq2.log"),
         level=logging.INFO, 
@@ -75,14 +77,16 @@ def main(args):
 
     # Build the DESeq2 objects
     from pydeseq2.dds import DeseqDataSet
+    from pydeseq2.default_inference import DefaultInference  # this is for the inference engine we will use
     logging.info("Building DESeq2 objects")
+    inference = DefaultInference(n_cpus=n_cpus)
     dds = DeseqDataSet(
         adata=pdata,
         design_factors=design_factors,
         continuous_factors=continuous_factors,
         ref_level=[reference_factor, reference_value],
         refit_cooks=refit_cooks,
-        n_cpus=n_cpus,
+        inference=inference
     )
 
     # Run DESeq2
@@ -102,7 +106,7 @@ def main(args):
         else:
             curr_contrast = curr_contrast.replace("_", "-")
             logging.info(f"Running DESeq2 for {curr_contrast} vs {reference_value}")
-            stat_res = DeseqStats(dds, contrast=[reference_factor, curr_contrast, reference_value], n_cpus=n_cpus)
+            stat_res = DeseqStats(dds, contrast=[reference_factor, curr_contrast, reference_value], inference=inference)
             stat_res.summary()
             results_df = stat_res.results_df
             results_df.sort_values("padj").to_csv(os.path.join(outdir_path, f"{curr_contrast}_vs_{reference_value}.tsv"), sep="\t")
