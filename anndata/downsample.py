@@ -1,15 +1,5 @@
 import scanpy as sc
 
-def dowsample_cells():
-    """Downsample adata to target_cells overall
-    
-    We want to be able to randomly select a number of cells from our AnnData
-    regardless of covariates
-    
-    Pretty sure ScanPy already has this in their API
-    """
-    pass
-
 
 def dowsample_counts(
     adata,

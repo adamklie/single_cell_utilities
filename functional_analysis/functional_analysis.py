@@ -16,7 +16,7 @@ def main(args):
     skip_pathway_activity = args.skip_pathway_activity
     skip_gsea = args.skip_gsea
     skip_ora = args.skip_ora
-    tf_annotation_resource = "dorothea"
+    tf_annotation_resource = "collectri"
     tf_method = "ulm"
     tf_additional_args = {}
     pathway_annotation_resource = "progeny"
@@ -56,6 +56,8 @@ def main(args):
     workflow_hash.update(str(random.getrandbits(128)).encode("utf-8"))
     
     # Log file
+    if os.path.exists(os.path.join(outdir_path, "functional_analysis.log")):
+        os.remove(os.path.join(outdir_path, "functional_analysis.log"))
     logging.basicConfig(
         filename=os.path.join(outdir_path, "functional_analysis.log"),
         level=logging.INFO, 
@@ -104,10 +106,10 @@ def main(args):
         "ora": ora_params if not skip_ora else None,
         "version": version_params
     }
-    if not os.path.exists(os.path.join(outdir_path, "pseudobulk_functional_analysis.yaml")):
+    if not os.path.exists(os.path.join(outdir_path, "functional_analysis.yaml")):
         logging.info("Writing params to {}".format(outdir_path))
         with open(
-            os.path.join(outdir_path, "pseudobulk_functional_analysis.yaml"), "w"
+            os.path.join(outdir_path, "functional_analysis.yaml"), "w"
         ) as outfile:
             yaml.dump(params, outfile, default_flow_style=False)
     else:
@@ -289,7 +291,7 @@ def main(args):
                 save=os.path.join(outdir_path, f"{name}_{ora_resource}_{ora_msigdb_set}_ora_dotplot.png")
             )
 
-    logging.info("Done!")
+    logging.info("Done with functional analysis")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 131, in <module>
+    main()
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 71, in main
+    n_topics = list(map(int, n_topics))
+ValueError: invalid literal for int() with base 10: '2,'

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 130, in <module>
+    main()
+  File "/cellar/users/aklie/projects/igvf/beta_cell_networks/infer_grns/scenicplus/bin/igvf_sc-islet_10X-Multiome/runModels_lda_mallet.py", line 70, in main
+    n_topics = list(map(int, n_topics.split(',')))
+AttributeError: 'list' object has no attribute 'split'

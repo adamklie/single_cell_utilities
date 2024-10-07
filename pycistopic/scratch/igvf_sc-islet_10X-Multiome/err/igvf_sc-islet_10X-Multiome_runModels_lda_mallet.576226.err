@@ -1,0 +1,9 @@
+usage: runModels_lda_mallet.py [-h] --inputcisTopic_obj INPUTCISTOPIC_OBJ
+                               --output OUTPUT --n_topics N_TOPICS --n_cpu
+                               N_CPU [--n_iter N_ITER] [--alpha ALPHA]
+                               [--alpha_by_topic ALPHA_BY_TOPIC] [--eta ETA]
+                               [--eta_by_topic ETA_BY_TOPIC]
+                               [--save_path SAVE_PATH] [--seed SEED]
+                               [--temp_dir TEMP_DIR]
+                               [--reuse_corpus REUSE_CORPUS]
+runModels_lda_mallet.py: error: unrecognized arguments: 4, 8, 16, 32, 48, 64, 80
