@@ -16,12 +16,12 @@ script_path=/cellar/users/aklie/projects/igvf/single_cell_utilities/snapatac2/ca
 
 # Inputs
 input_h5ad_path=$1
-groupy_key=$2
+groupby_key=$2
 outdir_path=$3
 
 # Echo inputs and number of inputs
 echo -e "input_h5ad_path: $input_h5ad_path"
-echo -e "groupy_key: $groupy_key"
+echo -e "groupby_key: $groupby_key"
 echo -e "outdir_path: $outdir_path"
 
 # Make outdir path if it doesn't exist
