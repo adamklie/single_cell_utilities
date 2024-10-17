@@ -28,13 +28,14 @@ def main(args):
     bg2bw_path = args.bg2bw_path
     save_fragments = args.save_fragments
     save_coverage = args.save_coverage
+    n_jobs = args.n_jobs
 
     # Make output directory if doesn't already exist
     if not os.path.exists(path_outdir):
         os.makedirs(path_outdir)
 
     # Set up logging
-    log_file = os.path.join(path_outdir, "pseudobulk_and_peakcalling.log")
+    log_file = os.path.join(path_outdir, "pseudobulk.log")
     if os.path.exists(log_file):
         os.remove(log_file)
     random_id = hashlib.md5(str(random.getrandbits(128)).encode()).hexdigest()
@@ -92,6 +93,7 @@ def main(args):
             suffix=".bedgraph",
             output_format="bedgraph",
             out_dir=save_coverage,
+            n_jobs=n_jobs,
         )
         time_out = time.time()
         logging.info(f"Coverage exported to {save_coverage} in {time_out - time_in} seconds.")
@@ -141,6 +143,7 @@ if __name__ == "__main__":
     parser.add_argument("--chromsizes_path", type=str, required=False, default="/cellar/users/aklie/data/ref/genomes/hg38/GRCh38_EBV.chrom.sizes", help="Path to chromsizes file for genome of interest")
     parser.add_argument('--save_fragments', type=str, required=False, default=None, help='Path to save fragments.')
     parser.add_argument('--save_coverage', type=str, required=False, default=None, help='Path to save bigWig coverage.')
+    parser.add_argument('--n_jobs', type=int, required=False, default=1, help='Number of jobs to run in parallel.')
 
     # Parse args
     args = parser.parse_args()
