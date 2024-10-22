@@ -7,7 +7,7 @@ input_tsv=$1
 output_tsv=$2
 
 # Get the number of fragments for each sample
-frag_counts=($(cut -f1 $input_tsv | xargs -I {} wc -l {} | cut -d' ' -f1))
+frag_counts=($(cut -f1 $input_tsv | xargs -I {} sh -c 'zcat {} | wc -l'))
 names=($(cut -f2 $input_tsv))
 
 # Write the output tsv (name/tab/frag_count)

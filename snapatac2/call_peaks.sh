@@ -30,11 +30,11 @@ if [ ! -d $outdir_path ]; then
 fi 
 
 cmd="python $script_path \
---input_path $input_h5ad_path \
---outdir_path $outdir_path \
+--path_input $input_h5ad_path \
+--path_outdir $outdir_path \
 --groupby_key $groupby_key \
---save_peaks $outdir_path/peak_calls \
---save_peak_matrix $outdir_path/peak_matrices \
+--save_peaks $outdir_path \
+--save_peak_matrix $outdir_path/matrix \
 --n_jobs $SLURM_CPUS_PER_TASK"
 echo -e "Running:\n $cmd\n"
 eval $cmd

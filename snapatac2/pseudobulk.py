@@ -29,13 +29,14 @@ def main(args):
     save_fragments = args.save_fragments
     save_coverage = args.save_coverage
     n_jobs = args.n_jobs
+    log_file_name = args.log_file_name
 
     # Make output directory if doesn't already exist
     if not os.path.exists(path_outdir):
         os.makedirs(path_outdir)
 
     # Set up logging
-    log_file = os.path.join(path_outdir, "pseudobulk.log")
+    log_file = os.path.join(path_outdir, log_file_name)
     if os.path.exists(log_file):
         os.remove(log_file)
     random_id = hashlib.md5(str(random.getrandbits(128)).encode()).hexdigest()
@@ -134,7 +135,7 @@ def main(args):
 if __name__ == "__main__":
     # Setting up argparse
     parser = argparse.ArgumentParser(description="Create pseudobulk fragment and bigwig files from an AnnDataSet or AnnData object.")
-    parser.add_argument('--path_input', type=str, required=False, help='Path to input AnnData or AnnDataset, will infer from file extension.')
+    parser.add_argument('--path_input', type=str, required=True, help='Path to input AnnData or AnnDataset, will infer from file extension.')
     parser.add_argument('--path_outdir', type=str, required=True, help='Path to output directory.')
     parser.add_argument('--path_annotations', type=str, required=False, help='Path to annotation file.')
     parser.add_argument('--annotations_key', type=str, required=False, help='Key to store annotations.')
@@ -144,6 +145,7 @@ if __name__ == "__main__":
     parser.add_argument('--save_fragments', type=str, required=False, default=None, help='Path to save fragments.')
     parser.add_argument('--save_coverage', type=str, required=False, default=None, help='Path to save bigWig coverage.')
     parser.add_argument('--n_jobs', type=int, required=False, default=1, help='Number of jobs to run in parallel.')
+    parser.add_argument('--log_file_name', type=str, required=False, default="pseudobulk.log", help='Name of log file.')
 
     # Parse args
     args = parser.parse_args()

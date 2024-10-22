@@ -18,7 +18,7 @@ syn.login(AUTHID, AUTHPW)
 # This is the path to the directory that contains the data in the structure you want to upload
 DIRECTORY_FOR_MY_PROJECT = "/path/to/Hon_WTC11-cardiomyocyte-differentiation_TF-Perturb-seq"
 
-# You will create a manifest file that will will contain the above structure
+# You will create a manifest file in this script that will end up at the path below
 PATH_TO_MANIFEST_FILE = "manifest-for-upload.tsv"
 
 # Step 1: Find the synapse ID of the project
