@@ -43,15 +43,15 @@ else
     --annotations_key pseudobulk \
     --n_jobs $SLURM_CPUS_PER_TASK \
     --log_file_name pseudobulk.log"
+    echo -e "Running $cmd\n"
 fi
-echo -e "Running $cmd\n"
-#eval $cmd
+eval $cmd
 
-# Cmd for making fragments
-if [ -d "$outdir_path/fragments" ] && [ "$overwrite" = "False" ]; then
-    cmd="echo -e '$outdir_path/fragments already exists with overwrite set to False, skipping'"
+# Check if .bed.gz files exist in $outdir_path/fragments and whether to overwrite
+if [ -d "$outdir_path/fragments" ] && find "$outdir_path/fragments" -name "*.bed.gz" | grep -q . && [ "$overwrite" = "False" ]; then
+    cmd="echo -e '$outdir_path/fragments already exists with .bed.gz files and overwrite set to False, skipping'"
 else
-    echo -e "Overwrite set to True, overwriting $outdir_path/fragments"
+    echo -e "Either no .bed.gz files found or overwrite set to True, proceeding with $outdir_path/fragments"
     cmd="python $script_path \
     --path_input $outdir_path/annotated.h5ads/_dataset.h5ads \
     --path_outdir $outdir_path \
@@ -59,8 +59,8 @@ else
     --save_fragments $outdir_path/fragments \
     --n_jobs $SLURM_CPUS_PER_TASK \
     --log_file_name write_fragments.log"
+    echo -e "Running $cmd\n"
 fi
-echo -e "Running $cmd\n"
-#eval $cmd
+eval $cmd
 
 date

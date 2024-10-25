@@ -15,11 +15,19 @@ def main(args):
     # Parse args
     path_h5ad = args.path_h5ad
     layer = args.layer
+    if layer == "None":
+        layer = None
     path_gene_lengths = args.path_gene_lengths
+    if path_gene_lengths == "None":
+        path_gene_lengths = None
     path_out = args.path_out
     groupby_keys = args.groupby_keys
     cellid_key = args.cellid_key
+    if cellid_key == "None":
+        cellid_key = None
     compare_key = args.compare_key
+    if compare_key == "None":
+        compare_key = None
     target_max_cells_per_pb = args.target_max_cells_per_pb
     if target_max_cells_per_pb == "None":
         target_max_cells_per_pb = None
@@ -88,15 +96,18 @@ def main(args):
     adata_pp = adata.copy()
 
     # Basic filtering
-    logging.info("Running basic gene filtering")
-    logging.info(f"Gene count before: {adata_pp.n_vars}")
+    logging.info("Running basic feature filtering")
+    logging.info(f"Feature count before: {adata_pp.n_vars}")
     sc.pp.filter_cells(adata_pp, min_genes=200)
     sc.pp.filter_genes(adata_pp, min_cells=3)
-    logging.info(f"Gene count after: {adata_pp.n_vars}")
+    logging.info(f"Feature count after: {adata_pp.n_vars}")
 
     # Verify that this is counts data
     import numpy as np
-    test_data = adata_pp.layers[layer][:10, :10].todense()
+    if layer is not None:
+        test_data = adata_pp.layers[layer][:10, :10].todense()
+    else:
+        test_data = adata_pp.X[:10, :10].todense()
     if np.all(test_data >= 0) and np.all(test_data.astype(int) == test_data):
         logging.info("The matrix contains count data.")
     else:
@@ -165,7 +176,7 @@ def main(args):
         adata_pp,
         sample_col=obs_key,
         groups_col=None,
-        layer='counts',
+        layer=layer,
         mode=mode,
         min_cells=min_cells,
         min_counts=min_counts
@@ -256,7 +267,7 @@ def main(args):
 
             # Print the number of genes and samples
             logging.info(f"Group: {cellid}")
-            logging.info(f"Genes: {pdata_deseq.n_vars}")
+            logging.info(f"Features: {pdata_deseq.n_vars}")
             logging.info(f"Samples: {pdata_deseq.n_obs}")
             logging.info("Samples in each group:")
             logging.info(pdata_deseq.obs[compare_key].value_counts().to_string())

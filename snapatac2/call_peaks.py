@@ -81,7 +81,7 @@ def main(args):
         assert groupby_key, "Groupby key must be provided if annotation file is not passed in."
 
     # Run peak calling
-    if adata.uns['macs3'] and not args.overwrite:
+    if 'macs3' in adata.uns and not args.overwrite:
         logging.info("Peak calling already run on this AnnData object. Use --overwrite to rerun.")
     else:
         logging.info(f"Running peak calling with SnapATAC2 version {snap.__version__}.")
