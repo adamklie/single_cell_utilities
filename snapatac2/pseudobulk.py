@@ -42,14 +42,16 @@ def main(args):
     random_id = hashlib.md5(str(random.getrandbits(128)).encode()).hexdigest()
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     import snapatac2 as snap
+    import anndata as ad
     logging.info("Run hash: " + random_id)
     logging.info("SnapATAC version: " + snap.__version__)
     logging.info(f"Arguments: {args}")
     
     # Load anndata or andataset
     if path_input.endswith(".h5ad"):
-        adata = snap.read(path_input)
+        adata = ad.read_h5ad(path_input)
         logging.info(f"Loading AnnData from {path_input}")
+        logging.info(f"AnnData contains {adata.shape[0]} cells and {adata.shape[1]} peaks.")
     elif path_input.endswith(".h5ads"):
         adata = snap.read_dataset(path_input)
         logging.info(f"Loading AnnDataset from {path_input}")
@@ -71,9 +73,12 @@ def main(args):
             subset_out = os.path.join(path_outdir, "annotated.h5ads")
             adata = adata.subset(obs_indices=np.where(pd.Index(adata.obs_names).isin(cell_annotations.index))[0], out=subset_out)[0]
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
-        elif isinstance(adata, snap.AnnData):
-            adata = adata[pd.Index(adata.obs_names).isin(cell_annotations.index)]
+        elif isinstance(adata, ad.AnnData):
+            adata = adata[pd.Index(adata.obs_names).isin(cell_annotations.index), :].copy()
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
+            adata.obs[annotations_key] = adata.obs[annotations_key].astype(str)
+            logging.info(f"Writing annotated AnnData to {os.path.join(path_outdir, 'annotated.h5ad')}")
+            adata.write(os.path.join(path_outdir, "annotated.h5ad"))
         groupby_key = annotations_key
     else:
         assert groupby_key, "Groupby key must be provided if annotation file is passed in."

@@ -31,6 +31,7 @@ def main(args):
     min_len = args.min_len
     save_peaks = args.save_peaks
     save_peak_matrix = args.save_peak_matrix
+    chromsizes_path = args.chromsizes_path
     n_jobs = args.n_jobs
 
     # Make output directory if doesn't already exist
@@ -44,6 +45,7 @@ def main(args):
     random_id = hashlib.md5(str(random.getrandbits(128)).encode()).hexdigest()
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     import snapatac2 as snap
+    import anndata as ad
     logging.info("Run hash: " + random_id)
     logging.info("SnapATAC version: " + snap.__version__)
     logging.info(f"Arguments: {args}")
@@ -73,7 +75,7 @@ def main(args):
             subset_out = os.path.join(path_outdir, "annotated.h5ads")
             adata = adata.subset(obs_indices=np.where(pd.Index(adata.obs_names).isin(cell_annotations.index))[0], out=subset_out)[0]
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
-        elif isinstance(adata, snap.AnnData):
+        elif isinstance(adata, ad.AnnData):
             adata = adata[pd.Index(adata.obs_names).isin(cell_annotations.index)]
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
         groupby_key = annotations_key
@@ -106,7 +108,14 @@ def main(args):
             os.makedirs(save_peaks)
             
         # Get consensus peaks
-        peaks = snap.tl.merge_peaks(adata.uns['macs3'], snap.genome.hg38)
+        if chromsizes_path:
+            logging.info(f"Using chromsizes file at {chromsizes_path}.")
+            chromsizes = pd.read_csv(chromsizes_path, sep="\t", header=None, names=["chrom", "size"])
+            chromsizes = chromsizes.set_index("chrom").to_dict()["size"]
+            chromsizes = {k: int(v) for k, v in chromsizes.items()}
+            peaks = snap.tl.merge_peaks(adata.uns['macs3'], chromsizes)
+        else:
+            peaks = snap.tl.merge_peaks(adata.uns['macs3'], snap.genome.hg38)
         
         # Save each peakset to narrowPeak format in output directory
         logging.info("Saving peaksets to narrowPeak format.")
@@ -167,6 +176,7 @@ if __name__ == "__main__":
     parser.add_argument('--save_peaks', type=str, required=False, default=None, help='Path to save peak calls to.')
     parser.add_argument('--save_peak_matrix', type=str, required=False, default=None, help='Path to save peak matrix to.')
     parser.add_argument('--overwrite', action='store_true', help='Overwrite existing peak calls.')
+    parser.add_argument("--chromsizes_path", type=str, required=False, default=None, help="Path to chromsizes file for genome of interest")
     parser.add_argument("--n_jobs", type=int, required=False, default=1, help="Number of jobs to run in parallel.")
 
     # Parse args

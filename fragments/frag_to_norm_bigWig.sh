@@ -5,7 +5,7 @@
 # sbatch frag_to_norm_bigWig.sh --SLURM_SETINGS <input_tsv> <output_dir> <threads>
 #####
 
-# based on https://github.com/EngreitzLab/sc-E2G/blob/main/workflow/rules/frag_to_norm_bigWig.smk
+# based on https://github.com/EngreitzLab/scE2G/blob/main/workflow/rules/frag_to_tagAlign.smk
 
 # Date
 date
@@ -37,7 +37,7 @@ echo -e "threads: $threads\n"
 # Calculate the scale factor
 echo -e "Calculating scale factor"
 frag_count=$(zcat $input_frag_path | awk '$1 !~ /_/' | wc -l)
-scale_factor=$(echo "$frag_count / 1000000" | bc)
+scale_factor=$(echo "scale=6; 1000000 / $frag_count" | bc)
 echo -e "Scale factor: $scale_factor"
 
 # Save the scale factor to output_dir/$name.scale_factor.txt
