@@ -15,11 +15,19 @@ def main(args):
     # Parse args
     path_h5ad = args.path_h5ad
     layer = args.layer
+    if layer == "None":
+        layer = None
     path_gene_lengths = args.path_gene_lengths
+    if path_gene_lengths == "None":
+        path_gene_lengths = None
     path_out = args.path_out
     groupby_keys = args.groupby_keys
     cellid_key = args.cellid_key
+    if cellid_key == "None":
+        cellid_key = None
     compare_key = args.compare_key
+    if compare_key == "None":
+        compare_key = None
     target_max_cells_per_pb = args.target_max_cells_per_pb
     if target_max_cells_per_pb == "None":
         target_max_cells_per_pb = None
@@ -84,19 +92,19 @@ def main(args):
     adata = sc.read_h5ad(path_h5ad)
     logging.info("Data shape: {}".format(adata.shape))
 
-    # Get a copy of the adata_pp
-    adata_pp = adata.copy()
-
     # Basic filtering
-    logging.info("Running basic gene filtering")
-    logging.info(f"Gene count before: {adata_pp.n_vars}")
-    sc.pp.filter_cells(adata_pp, min_genes=200)
-    sc.pp.filter_genes(adata_pp, min_cells=3)
-    logging.info(f"Gene count after: {adata_pp.n_vars}")
+    logging.info("Running basic feature filtering")
+    logging.info(f"Feature count before: {adata.n_vars}")
+    sc.pp.filter_cells(adata, min_genes=200)
+    sc.pp.filter_genes(adata, min_cells=3)
+    logging.info(f"Feature count after: {adata.n_vars}")
 
     # Verify that this is counts data
     import numpy as np
-    test_data = adata_pp.layers[layer][:10, :10].todense()
+    if layer is not None:
+        test_data = adata.layers[layer][:10, :10].todense()
+    else:
+        test_data = adata.X[:10, :10].todense()
     if np.all(test_data >= 0) and np.all(test_data.astype(int) == test_data):
         logging.info("The matrix contains count data.")
     else:
@@ -104,20 +112,20 @@ def main(args):
 
     from utils import get_pseudobulk_groups
     get_pseudobulk_groups(
-        adata_pp, 
+        adata, 
         groupby_cols=groupby_keys,
         target_max_cells_per_pb=target_max_cells_per_pb,
         obs_key=obs_key,
         copy=False,
         random_state=random_state
     )
-    print(adata_pp.obs[obs_key].value_counts())
+    print(adata.obs[obs_key].value_counts())
 
     # No column should have multiple non-zero values across all rows
     import pandas as pd
-    crosstab = pd.crosstab(adata_pp.obs["condition"], adata_pp.obs[obs_key])
-    if (crosstab > 0).sum(axis=0).max() > 1:
-        logging.info("There are pseudobulks with cells from multiple conditions.")
+    #crosstab = pd.crosstab(adata.obs["condition"], adata.obs[obs_key])
+    #if (crosstab > 0).sum(axis=0).max() > 1:
+    #    logging.info("There are pseudobulks with cells from multiple conditions.")
 
     # Create a dir for the pseudobulk h5ads
     if not os.path.exists(os.path.join(path_out, "pdatas")):
@@ -126,7 +134,7 @@ def main(args):
     # Get pseudo-bulk profile WITHOUT any filtering
     logging.info("Getting pseudo-bulk profile WITHOUT any filtering")
     pdata = dc.get_pseudobulk(
-        adata_pp,
+        adata,
         sample_col=obs_key,
         groups_col=None,
         layer=layer,
@@ -148,6 +156,7 @@ def main(args):
     from utils import convert_object_in_obs
     convert_object_in_obs(pdata)
     pdata.write(os.path.join(path_out, "pdatas", "pseudobulk_no_filter.h5ad"))
+    pdata.obs.to_csv(os.path.join(path_out, "pdatas", "pseudobulk_no_filter_metadata.csv"))
     pdata_df = pdata.to_df().T
     pdata_df.to_csv(os.path.join(path_out, "pdatas", "pseudobulk_no_filter.tsv"), sep="\t", index=True)
 
@@ -162,10 +171,10 @@ def main(args):
     # Get pseudo-bulk profile WITH filtering
     logging.info("Getting pseudo-bulk profile WITH filtering")
     pdata = dc.get_pseudobulk(
-        adata_pp,
+        adata,
         sample_col=obs_key,
         groups_col=None,
-        layer='counts',
+        layer=layer,
         mode=mode,
         min_cells=min_cells,
         min_counts=min_counts
@@ -256,7 +265,7 @@ def main(args):
 
             # Print the number of genes and samples
             logging.info(f"Group: {cellid}")
-            logging.info(f"Genes: {pdata_deseq.n_vars}")
+            logging.info(f"Features: {pdata_deseq.n_vars}")
             logging.info(f"Samples: {pdata_deseq.n_obs}")
             logging.info("Samples in each group:")
             logging.info(pdata_deseq.obs[compare_key].value_counts().to_string())

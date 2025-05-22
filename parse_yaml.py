@@ -15,3 +15,4 @@ for k, v in config.items():
                 print(f"{k}_{sub_k}='{sub_v}'")
     else:
         print(f"{k}='{v}'")
+        

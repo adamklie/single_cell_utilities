@@ -12,8 +12,7 @@ echo -e "Job ID: $SLURM_JOB_ID\n"
 # Configuring env (choose either singularity or conda)
 source activate /cellar/users/aklie/opt/miniconda3/envs/scverse-lite-py39
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/miniconda3/lib/
-path_filter_script=/cellar/users/aklie/projects/igvf/single_cell_utilities/peak_analysis/filter_peaks.py
-path_annotate_script=/cellar/users/aklie/projects/igvf/single_cell_utilities/peak_analysis/annotate_peaks.py
+path_script=/cellar/users/aklie/projects/igvf/single_cell_utilities/peaks/annotate_peaks.py
 
 # Inputs
 input_tsv=$1
@@ -22,11 +21,7 @@ input_peak_paths=($(cut -f1 $input_tsv))
 names=($(cut -f2 $input_tsv))
 input_peak_path=${input_peak_paths[$SLURM_ARRAY_TASK_ID-1]}
 name=${names[$SLURM_ARRAY_TASK_ID-1]}
-
-# TODOs
-path_blacklist=/cellar/users/aklie/data/ref/genomes/hg38/blacklist/blacklist.bed
-n_peaks=null
-min_q_value=null
+output_annot_path=$outdir_path/${name}.annotated.bed
 
 # Echo inputs 
 echo -e "input_peak_path: $input_peak_path"
@@ -39,9 +34,9 @@ if [ ! -d $outdir_path ]; then
 fi 
 
 # Step 2: Annotate peaks
-cmd="python $path_annotate_script \
---path_input_peaks $outdir_path/${name}.filt.bed \
---path_annotate_peaks $outdir_path/${name}.annotated.bed"
+cmd="python $path_script \
+--path_input_peaks $input_peak_path \
+--path_annotated_peaks $output_annot_path"
 echo -e "Running:\n $cmd\n"
 eval $cmd
 

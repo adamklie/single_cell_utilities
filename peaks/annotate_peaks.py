@@ -69,7 +69,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Annotate peaks using HOMER's annotatePeaks.pl script.")
     parser.add_argument('--path_input_peaks', type=str, required=True, help="Path to the input peak file.")
     parser.add_argument('--path_annotate_pl', type=str, default="/cellar/users/aklie/opt/homer/bin/annotatePeaks.pl", help="Full path to HOMER's annotatePeaks.pl script.")
-    parser.add_argument('--path_outdir', type=str, default="annotated_peaks.bed", help="Path to the output directory to save all results.")
+    parser.add_argument('--path_annotated_peaks', type=str, default="annotated_peaks.bed", help="Path to the output directory to save all results.")
 
     # Parse args
     args = parser.parse_args()

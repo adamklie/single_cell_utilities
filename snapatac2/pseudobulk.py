@@ -28,26 +28,30 @@ def main(args):
     bg2bw_path = args.bg2bw_path
     save_fragments = args.save_fragments
     save_coverage = args.save_coverage
+    n_jobs = args.n_jobs
+    log_file_name = args.log_file_name
 
     # Make output directory if doesn't already exist
     if not os.path.exists(path_outdir):
         os.makedirs(path_outdir)
 
     # Set up logging
-    log_file = os.path.join(path_outdir, "pseudobulk_and_peakcalling.log")
+    log_file = os.path.join(path_outdir, log_file_name)
     if os.path.exists(log_file):
         os.remove(log_file)
     random_id = hashlib.md5(str(random.getrandbits(128)).encode()).hexdigest()
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     import snapatac2 as snap
+    import anndata as ad
     logging.info("Run hash: " + random_id)
     logging.info("SnapATAC version: " + snap.__version__)
     logging.info(f"Arguments: {args}")
     
     # Load anndata or andataset
     if path_input.endswith(".h5ad"):
-        adata = snap.read(path_input)
+        adata = ad.read_h5ad(path_input)
         logging.info(f"Loading AnnData from {path_input}")
+        logging.info(f"AnnData contains {adata.shape[0]} cells and {adata.shape[1]} peaks.")
     elif path_input.endswith(".h5ads"):
         adata = snap.read_dataset(path_input)
         logging.info(f"Loading AnnDataset from {path_input}")
@@ -69,9 +73,12 @@ def main(args):
             subset_out = os.path.join(path_outdir, "annotated.h5ads")
             adata = adata.subset(obs_indices=np.where(pd.Index(adata.obs_names).isin(cell_annotations.index))[0], out=subset_out)[0]
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
-        elif isinstance(adata, snap.AnnData):
-            adata = adata[pd.Index(adata.obs_names).isin(cell_annotations.index)]
+        elif isinstance(adata, ad.AnnData):
+            adata = adata[pd.Index(adata.obs_names).isin(cell_annotations.index), :].copy()
             adata.obs[annotations_key] = cell_annotations[adata.obs_names].values.tolist()
+            adata.obs[annotations_key] = adata.obs[annotations_key].astype(str)
+            logging.info(f"Writing annotated AnnData to {os.path.join(path_outdir, 'annotated.h5ad')}")
+            adata.write(os.path.join(path_outdir, "annotated.h5ad"))
         groupby_key = annotations_key
     else:
         assert groupby_key, "Groupby key must be provided if annotation file is passed in."
@@ -92,6 +99,7 @@ def main(args):
             suffix=".bedgraph",
             output_format="bedgraph",
             out_dir=save_coverage,
+            n_jobs=n_jobs,
         )
         time_out = time.time()
         logging.info(f"Coverage exported to {save_coverage} in {time_out - time_in} seconds.")
@@ -132,7 +140,7 @@ def main(args):
 if __name__ == "__main__":
     # Setting up argparse
     parser = argparse.ArgumentParser(description="Create pseudobulk fragment and bigwig files from an AnnDataSet or AnnData object.")
-    parser.add_argument('--path_input', type=str, required=False, help='Path to input AnnData or AnnDataset, will infer from file extension.')
+    parser.add_argument('--path_input', type=str, required=True, help='Path to input AnnData or AnnDataset, will infer from file extension.')
     parser.add_argument('--path_outdir', type=str, required=True, help='Path to output directory.')
     parser.add_argument('--path_annotations', type=str, required=False, help='Path to annotation file.')
     parser.add_argument('--annotations_key', type=str, required=False, help='Key to store annotations.')
@@ -141,6 +149,8 @@ if __name__ == "__main__":
     parser.add_argument("--chromsizes_path", type=str, required=False, default="/cellar/users/aklie/data/ref/genomes/hg38/GRCh38_EBV.chrom.sizes", help="Path to chromsizes file for genome of interest")
     parser.add_argument('--save_fragments', type=str, required=False, default=None, help='Path to save fragments.')
     parser.add_argument('--save_coverage', type=str, required=False, default=None, help='Path to save bigWig coverage.')
+    parser.add_argument('--n_jobs', type=int, required=False, default=1, help='Number of jobs to run in parallel.')
+    parser.add_argument('--log_file_name', type=str, required=False, default="pseudobulk.log", help='Name of log file.')
 
     # Parse args
     args = parser.parse_args()
