@@ -1,0 +1,21 @@
+[project]
+name = "pycistopic-pipeline"
+version = "0.1.0"
+description = "End-to-end cisTopic analysis pipeline: build objects, train LDA models, and evaluate results"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "pycisTopic @ git+https://github.com/aertslab/pycisTopic.git",
+    "pyyaml",
+    "scanpy",
+    "anndata",
+    "matplotlib",
+    "seaborn",
+    "numpy<2",
+    "setuptools<81",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+    "nbconvert>=7.17.0",
+]

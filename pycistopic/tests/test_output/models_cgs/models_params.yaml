@@ -1,0 +1,16 @@
+method: cgs
+input: /Users/adamklie/Desktop/projects/single_cell_utilities/pycistopic/tests/test_output/build_mtx/test_mtx.pkl
+output: /Users/adamklie/Desktop/projects/single_cell_utilities/pycistopic/tests/test_output/models_cgs
+n_topics:
+- 2
+- 3
+- 5
+n_iter: 10
+n_cpu: 1
+alpha: 50.0
+alpha_by_topic: true
+eta: 0.1
+eta_by_topic: false
+seed: 42
+save_path: null
+temp_dir: null

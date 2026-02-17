@@ -1,0 +1,7 @@
+path_models: /cellar/users/aklie/data/datasets/sc-islet-differentiation_10X-Multiome/scratch/2025_11_30/pycistopic/models.pkl
+path_cistopic_obj: /cellar/users/aklie/data/datasets/sc-islet-differentiation_10X-Multiome/scratch/2025_11_30/cistopic_obj.pkl
+path_h5ad: /cellar/users/aklie/data/datasets/sc-islet-differentiation_10X-Multiome/scratch/2025_11_30/peak_matrix.h5ad
+path_out: /cellar/users/aklie/data/datasets/sc-islet-differentiation_10X-Multiome/scratch/2025_11_30/pycistopic
+groupby_key: cell_type
+categorical_covariates: null
+continuous_covariates: null

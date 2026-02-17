@@ -1,0 +1,10 @@
+cistopic_obj: /Users/adamklie/Desktop/projects/single_cell_utilities/pycistopic/tests/test_output/build_mtx/test_mtx.pkl
+models: /Users/adamklie/Desktop/projects/single_cell_utilities/pycistopic/tests/test_output/models_cgs/models.pkl
+output_dir: /Users/adamklie/Desktop/projects/single_cell_utilities/pycistopic/tests/test_output/eval_cgs
+n_topics: null
+metrics:
+- Arun_2010
+- Cao_Juan_2009
+- loglikelihood
+run_umap: true
+groupby: cell_type
